@@ -1,11 +1,11 @@
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TemperatureChart } from "./components/TemperatureChart";
-import { GHGAreaChart } from "./components/GHGAreaChart";
-import { GHGPieChart } from "./components/GHGPieChart";
+import { TemperatureChart } from "@/components/TemperatureChart";
+import { GHGAreaChart } from "@/components/GHGAreaChart";
+import { GHGPieChart } from "@/components/GHGPieChart";
 import { Card, CardContent, CardHeader } from "./components/ui/card";
-import { SideBar } from "./components/SideBar";
+import { SideBar } from "@/components/SideBar";
 
 function App() {
   return (

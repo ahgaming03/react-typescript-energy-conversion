@@ -1,4 +1,3 @@
-"use client";
 
 import { LabelList, Pie, PieChart } from "recharts";
 
@@ -19,9 +18,9 @@ const chartData = [
 ];
 
 const chartConfig = {
-  // gasPercentage: {
-  //   label: "Gas",
-  // },
+  gasPercentage: {
+    label: "Gas",
+  },
   CO2: {
     label: "CO2",
     color: "hsl(var(--chart-1))",
