@@ -7,6 +7,8 @@ import { GHGPieChart } from "@/components/GHGPieChart";
 import { Card, CardContent, CardHeader } from "./components/ui/card";
 import { SideBar } from "@/components/SideBar";
 
+import info from "@/assets/data/factoryInfo.json";
+
 function App() {
   return (
     <>
@@ -24,9 +26,9 @@ function App() {
                       <p>ID:</p>
                       <p>Name:</p>
                     </div>
-                    <div className="">
-                      <p>1234</p>
-                      <p>Factory A</p>
+                    <div>
+                      <p>{info.factory.id}</p>
+                      <p>{info.factory.name}</p>
                     </div>
                   </div>
                 </div>

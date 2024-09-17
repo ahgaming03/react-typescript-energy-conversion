@@ -1,0 +1,46 @@
+{
+  "fuel": [
+    {
+      "id": 1,
+      "name": "Gasoline",
+      "value": 1.0
+    },
+    {
+      "id": 2,
+      "name": "Diesel",
+      "value": 1.1
+    },
+    {
+      "id": 3,
+      "name": "Electric",
+      "value": 0.5
+    },
+    {
+      "id": 4,
+      "name": "Coal",
+      "value": 0.8
+    }
+  ],
+  "location": [
+    {
+      "id": 1,
+      "name": "USA",
+      "value": 1.0
+    },
+    {
+      "id": 2,
+      "name": "Europe",
+      "value": 1.1
+    },
+    {
+      "id": 3,
+      "name": "Asia",
+      "value": 0.9
+    },
+    {
+      "id": 4,
+      "name": "Africa",
+      "value": 0.8
+    }
+  ]
+}
