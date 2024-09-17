@@ -15,8 +15,8 @@ function App() {
         <div className="flex flex-grow">
           <SideBar />
           <div className="w-full">
-            <main className="flex w-full gap-3 px-3 max-md:flex-col">
-              <section>
+            <main className="flex h-full gap-3 px-3 pb-3 max-md:flex-col">
+              <section className="">
                 <div className="mb-3 flex items-center justify-between md:flex-col-reverse">
                   <div className="text-3xl font-bold uppercase">Current</div>
                   <div className="flex gap-2">
@@ -30,7 +30,7 @@ function App() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-evenly md:flex-col md:gap-3">
+                <div className="flex items-center md:flex-col md:gap-3">
                   <Card className="h-48 w-48 rounded-2xl border shadow-xl">
                     <GHGPieChart />
                   </Card>
@@ -47,13 +47,9 @@ function App() {
                   </Card>
                 </div>
               </section>
-              <div className="flex w-full flex-col gap-3 md:gap-20">
-                <section className="">
-                  <GHGAreaChart />
-                </section>
-                <section>
-                  <TemperatureChart />
-                </section>
+              <div className="flex w-full flex-grow flex-col justify-evenly gap-3">
+                <GHGAreaChart />
+                <TemperatureChart />
               </div>
             </main>
           </div>
