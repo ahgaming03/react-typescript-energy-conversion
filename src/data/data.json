@@ -1,0 +1,121 @@
+{
+  "GHG": [
+    {
+      "id": "111",
+      "day": "08/11",
+      "month": "08",
+      "CO2": 32.97,
+      "NO2": 16.48,
+      "CH4": 20.6,
+      "others": 29.95
+    },
+    {
+      "id": "112",
+      "day": "08/13",
+      "month": "08",
+      "CO2": 32.97,
+      "NO2": 16.48,
+      "CH4": 20.6,
+      "others": 29.95
+    },
+    {
+      "id": "113",
+      "day": "08/14",
+      "month": "08",
+      "CO2": 36.94,
+      "NO2": 18.47,
+      "CH4": 23.09,
+      "others": 21.5
+    },
+    {
+      "id": "114",
+      "day": "08/15",
+      "month": "08",
+      "CO2": 38.15,
+      "NO2": 19.07,
+      "CH4": 23.84,
+      "others": 18.94
+    },
+    {
+      "id": "115",
+      "day": "08/16",
+      "month": "08",
+      "CO2": 38.26,
+      "NO2": 19.13,
+      "CH4": 23.92,
+      "others": 18.69
+    },
+    {
+      "id": "116",
+      "day": "08/17",
+      "month": "08",
+      "CO2": 36.94,
+      "NO2": 18.47,
+      "CH4": 23.09,
+      "others": 21.5
+    },
+    {
+      "id": "117",
+      "day": "08/18",
+      "month": "08",
+      "CO2": 39.67,
+      "NO2": 19.83,
+      "CH4": 24.79,
+      "others": 15.7
+    },
+    {
+      "id": "118",
+      "day": "08/19",
+      "month": "08",
+      "CO2": 39.87,
+      "NO2": 19.93,
+      "CH4": 24.92,
+      "others": 15.28
+    },
+    {
+      "id": "119",
+      "day": "08/20",
+      "month": "08",
+      "CO2": 39.87,
+      "NO2": 19.93,
+      "CH4": 24.92,
+      "others": 15.28
+    },
+    {
+      "id": "120",
+      "day": "08/21",
+      "month": "08",
+      "CO2": 35.87,
+      "NO2": 19.93,
+      "CH4": 24.92,
+      "others": 19.28
+    }
+  ],
+  "temperature": [
+    {
+      "id": "200",
+      "hours": "00:00",
+      "temperature": 25.5
+    },
+    { "id": "201", "hours": "1:00", "temperature": 25.5 },
+    { "id": "202", "hours": "2:00", "temperature": 25.5 },
+    { "id": "203", "hours": "3:00", "temperature": 25.5 },
+    { "id": "204", "hours": "4:00", "temperature": 25.5 },
+    { "id": "205", "hours": "5:00", "temperature": 25.5 },
+    { "id": "206", "hours": "6:00", "temperature": 25.5 },
+    { "id": "207", "hours": "7:00", "temperature": 50 },
+    { "id": "208", "hours": "8:00", "temperature": 75 },
+    { "id": "209", "hours": "9:00", "temperature": 95 },
+    { "id": "210", "hours": "10:00", "temperature": 96 },
+    { "id": "211", "hours": "11:00", "temperature": 95 },
+    { "id": "212", "hours": "12:00", "temperature": 95 },
+    { "id": "213", "hours": "13:00", "temperature": 94 },
+    { "id": "214", "hours": "14:00", "temperature": 96 },
+    { "id": "215", "hours": "15:00", "temperature": 96 },
+    { "id": "216", "hours": "16:00", "temperature": 95 },
+    { "id": "217", "hours": "17:00", "temperature": 97 },
+    { "id": "218", "hours": "18:00", "temperature": 96 },
+    { "id": "219", "hours": "19:00", "temperature": 72 },
+    { "id": "220", "hours": "20:00", "temperature": 54 }
+  ]
+}

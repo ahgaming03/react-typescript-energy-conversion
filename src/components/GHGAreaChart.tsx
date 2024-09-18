@@ -9,18 +9,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { IGHG } from "@/utils/type";
+import { useEffect, useState } from "react";
 
-export const description = "A stacked area chart with expand stacking";
-
-const chartData = [
-  { day: "08/13", CO2: 32.97, NO2: 16.48, CH4: 20.6, other: 29.95 },
-  { day: "08/14", CO2: 36.94, NO2: 18.47, CH4: 23.09, other: 21.5 },
-  { day: "08/15", CO2: 38.15, NO2: 19.07, CH4: 23.84, other: 18.94 },
-  { day: "08/16", CO2: 38.26, NO2: 19.13, CH4: 23.92, other: 18.69 },
-  { day: "08/17", CO2: 36.94, NO2: 18.47, CH4: 23.09, other: 21.5 },
-  { day: "08/18", CO2: 39.67, NO2: 19.83, CH4: 24.79, other: 15.7 },
-  { day: "08/19", CO2: 39.87, NO2: 19.93, CH4: 24.92, other: 15.28 },
-];
+// temp data
+import { useDataContext } from "@/context/DataContext";
 
 const chartConfig = {
   CO2: {
@@ -35,13 +28,25 @@ const chartConfig = {
     label: "CH4",
     color: "#3bc3de",
   },
-  other: {
+  others: {
     label: "Others",
     color: "#ffae4c",
   },
 } satisfies ChartConfig;
 
 export function GHGAreaChart() {
+  const [chartData, setChartData] = useState<IGHG[]>([]);
+  const data = useDataContext().GHG;
+  useEffect(() => {
+    let tempData = data;
+    if (!tempData) return;
+    if (tempData.length > 7) {
+      tempData = tempData.slice(tempData.length - 7);
+    }
+    // console.log(useDataContext());
+    setChartData(tempData);
+  }, []);
+
   return (
     <Card>
       <CardHeader className="">
@@ -122,15 +127,15 @@ export function GHGAreaChart() {
                   stopOpacity={0.1}
                 />
               </linearGradient>
-              <linearGradient id="fillOther" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="fillOthers" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="var(--color-other)"
+                  stopColor="var(--color-others)"
                   stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor="var(--color-other)"
+                  stopColor="var(--color-others)"
                   stopOpacity={0.1}
                 />
               </linearGradient>
@@ -163,11 +168,11 @@ export function GHGAreaChart() {
               dot={true}
             />
             <Area
-              dataKey="other"
+              dataKey="others"
               type="natural"
-              fill="url(#fillOther)"
+              fill="url(#fillOthers)"
               fillOpacity={0.1}
-              stroke="var(--color-other)"
+              stroke="var(--color-others)"
               stackId="GHG"
               dot={true}
             />

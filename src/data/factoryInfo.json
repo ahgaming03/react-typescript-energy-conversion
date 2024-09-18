@@ -1,0 +1,8 @@
+{
+  "factory": {
+    "id": "1234",
+    "name": "Factory ABC",
+    "fuel": "Coal",
+    "location": "Vietnam"
+  }
+}

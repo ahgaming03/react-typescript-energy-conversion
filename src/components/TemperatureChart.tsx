@@ -15,22 +15,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-export const description = "A line chart with a label";
-const chartData = [
-  { hours: "8:00", temperature: 75 },
-  { hours: "9:00", temperature: 95 },
-  { hours: "10:00", temperature: 96 },
-  { hours: "11:00", temperature: 95 },
-  { hours: "12:00", temperature: 95 },
-  { hours: "13:00", temperature: 94 },
-  { hours: "14:00", temperature: 96 },
-  { hours: "15:00", temperature: 96 },
-  { hours: "16:00", temperature: 95 },
-  { hours: "17:00", temperature: 97 },
-  { hours: "18:00", temperature: 96 },
-  { hours: "19:00", temperature: 72 },
-  { hours: "20:00", temperature: 54 },
-];
+import { useEffect, useState } from "react";
+
 const chartConfig = {
   temperature: {
     label: "Temperature",
@@ -38,7 +24,21 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+import { ITemperature } from "@/utils/type";
+import { useDataContext } from "@/context/DataContext";
+
 export function TemperatureChart() {
+  const [chartData, setChartData] = useState<ITemperature[]>([]);
+  const data = useDataContext().temperature;
+  useEffect(() => {
+    let tempData = data;
+    if (!tempData) return;
+    if (tempData.length > 12) {
+      tempData = tempData.slice(tempData.length - 13);
+    }
+    setChartData(tempData);
+  }, []);
+
   return (
     <Card>
       <CardHeader>
