@@ -9,8 +9,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useFactoryInfoContext } from "@/context/FactoryInfoContext";
 
 export const SideBar = () => {
+  const factoryInfo = useFactoryInfoContext();
   return (
     <>
       <div className="flex flex-col gap-3 rounded border p-2 shadow max-md:hidden">
@@ -27,7 +29,16 @@ export const SideBar = () => {
           <DialogContent className="sm:max-w-[25rem]">
             <DialogHeader>
               <DialogTitle>Setting</DialogTitle>
-              <DialogDescription>Config data here.</DialogDescription>
+              <DialogDescription>
+                <div>
+                  <strong>Fuel: </strong>
+                  {factoryInfo?.fuel || "N/A"}
+                </div>
+                <div>
+                  <strong>Location: </strong>
+                  {factoryInfo?.location || "N/A"}
+                </div>
+              </DialogDescription>
             </DialogHeader>
             <SettingForm />
           </DialogContent>

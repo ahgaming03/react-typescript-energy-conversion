@@ -1,5 +1,8 @@
 // "use client"
 
+import { useEffect, useState } from "react";
+import { IFactoryInfo } from "@/utils/type";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -22,23 +25,38 @@ import {
 } from "@/components/ui/select";
 
 // Fetch data
-import data from "@/assets/data/config.json";
-// const data = fetch("https://api.example.com/config").then((res) => res.json());
 
 const formSchema = z.object({
-  fuel: z
-    .string({
-      required_error: "Please select a fuel.",
-    })
-    .nullable(),
-  location: z
-    .string({
-      required_error: "Please select an location.",
-    })
-    .nullable(),
+  fuel: z.string({
+    required_error: "Please select a fuel.",
+  }),
+  location: z.string({
+    required_error: "Please select an location.",
+  }),
 });
 
+interface IFuel {
+  id: string;
+  name: string;
+  value: number;
+}
+
+interface ILocation {
+  id: string;
+  name: string;
+  value: number;
+}
+
+import data from "@/data/config.json";
+
 export function SettingForm() {
+  const [fuel, setFuel] = useState<IFuel[]>([]);
+  const [location, setLocation] = useState<ILocation[]>([]);
+  useEffect(() => {
+    setFuel(data.fuel);
+    setLocation(data.location);
+  });
+
   // 1. Define form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,8 +64,6 @@ export function SettingForm() {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
 
@@ -67,8 +83,8 @@ export function SettingForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {data.fuel.map((item) => (
-                    <SelectItem key={item.id} value={item.value.toString()}>
+                  {fuel.map((item) => (
+                    <SelectItem key={item.id} value={item.name}>
                       {item.name}
                     </SelectItem>
                   ))}
@@ -91,8 +107,8 @@ export function SettingForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {data.location.map((item) => (
-                    <SelectItem key={item.id} value={item.value.toString()}>
+                  {location.map((item) => (
+                    <SelectItem key={item.id} value={item.name}>
                       {item.name}
                     </SelectItem>
                   ))}

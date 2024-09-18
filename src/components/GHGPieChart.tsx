@@ -1,24 +1,20 @@
-
 import { LabelList, Pie, PieChart } from "recharts";
 
 import {
   ChartConfig,
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useDataContext } from "@/context/DataContext";
+import { useEffect, useState } from "react";
 
 export const description = "A pie chart with a custom label";
 
-const chartData = [
-  { gasName: "CO2", gasPercentage: 39.87, fill: "#8979ff" },
-  { gasName: "NO2", gasPercentage: 19.93, fill: "#ff928a" },
-  { gasName: "CH4", gasPercentage: 24.92, fill: "#3bc3de" },
-  { gasName: "others", gasPercentage: 15.28, fill: "#ffae4c" },
-];
-
 const chartConfig = {
-  gasPercentage: {
+  value: {
     label: "Gas",
   },
   CO2: {
@@ -40,6 +36,34 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function GHGPieChart() {
+  const [chartData, setChartData] = useState([
+    { gas: "CO2", value: 25, fill: "#8979ff" },
+    { gas: "NO2", value: 25, fill: "#ff928a" },
+    { gas: "CH4", value: 25, fill: "#3bc3de" },
+    { gas: "others", value: 25, fill: "#ffae4c" },
+  ]);
+  const data = useDataContext().GHG;
+  useEffect(() => {
+    let tempData = data.slice(data.length - 1);
+    if (tempData.length > 0)
+      chartData.map((d) => {
+        switch (d.gas) {
+          case "CO2":
+            d.value = tempData[0]["CO2"];
+            break;
+          case "NO2":
+            d.value = tempData[0]["NO2"];
+            break;
+          case "CH4":
+            d.value = tempData[0]["CH4"];
+            break;
+          case "others":
+            d.value = tempData[0]["others"];
+            break;
+        }
+      });
+  }, []);
+
   return (
     <>
       <ChartContainer
@@ -53,18 +77,18 @@ export function GHGPieChart() {
           />
           <Pie
             data={chartData}
-            dataKey="gasPercentage"
-            nameKey="gasName"
+            dataKey="value"
+            nameKey="gas"
             startAngle={90}
             endAngle={-270}
           >
             <LabelList
-              dataKey="gasName"
-              className="fill-backwground"
-              stroke="none"
-              fontSize={10}
+              dataKey="gas"
+              className="fill-background"
+              stroke="3"
+              fontSize={12}
               formatter={(value: keyof typeof chartConfig) =>
-                chartConfig[value]?.label
+                chartData.find((d) => d.gas === value)?.value + "%"
               }
             />
           </Pie>
