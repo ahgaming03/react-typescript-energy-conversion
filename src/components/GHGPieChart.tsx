@@ -3,8 +3,6 @@ import { LabelList, Pie, PieChart } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -36,7 +34,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function GHGPieChart() {
-  const [chartData, setChartData] = useState([
+  const [chartData] = useState([
     { gas: "CO2", value: 25, fill: "#8979ff" },
     { gas: "NO2", value: 25, fill: "#ff928a" },
     { gas: "CH4", value: 25, fill: "#3bc3de" },

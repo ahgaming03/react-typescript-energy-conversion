@@ -1,7 +1,6 @@
 // "use client"
 
 import { useEffect, useState } from "react";
-import { IFactoryInfo } from "@/utils/type";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
