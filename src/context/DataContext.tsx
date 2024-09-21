@@ -80,7 +80,7 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
         .get(`${BASE_URL}/api/getData`)
         .then((res) => {
           const data = res.data;
-          if (data.length === 0) fetchDataAPI();
+          if (data.length === 0) setTimeout(fetchDataAPI, 10000);
           setTempData([]);
           setGHGData([]);
           data.forEach((element: any) => {
@@ -98,7 +98,12 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
         temperature: tempData,
       });
     };
-    fetchDataAPI();
+
+    const interval = setInterval(() => {
+      fetchDataAPI();
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, [data]);
 
   return (

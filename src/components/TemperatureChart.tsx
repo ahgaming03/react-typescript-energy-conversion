@@ -99,6 +99,7 @@ export function TemperatureChart() {
               axisLine={false}
               tickMargin={10}
               angle={-50}
+              tickFormatter={(value) => value}
             />
 
             <ChartTooltip
