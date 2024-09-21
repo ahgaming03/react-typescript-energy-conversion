@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
 import {
   CartesianGrid,
   LabelList,
@@ -6,7 +9,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
@@ -15,7 +17,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useEffect, useState } from "react";
+
+import { ITemperature } from "@/utils/type";
+import { useDataContext } from "@/context/DataContext";
 
 const chartConfig = {
   temperature: {
@@ -24,27 +28,44 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-import { ITemperature } from "@/utils/type";
-import { useDataContext } from "@/context/DataContext";
-
 export function TemperatureChart() {
   const [chartData, setChartData] = useState<ITemperature[]>([]);
-  const data = useDataContext().temperature;
+  const [sliceLimit, setSliceLimit] = useState<number>(
+    window.innerWidth > 768 ? 20 : 7,
+  );
+
+  const { temperature } = useDataContext();
+  const data: ITemperature[] = temperature;
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Update slice limit based on window width
+      setSliceLimit(window.innerWidth > 768 ? 20 : 7);
+    };
+    // Listen for window resize event
+    window.addEventListener("resize", handleResize);
+    // Cleanup the event listener
+    return () => window.removeEventListener("resize", handleResize);
+  });
+
   useEffect(() => {
     let tempData = data;
     if (!tempData) return;
-    if (tempData.length > 12) {
-      tempData = tempData.slice(tempData.length - 13);
+    if (tempData.length > sliceLimit) {
+      tempData = tempData.slice(tempData.length - sliceLimit - 1);
     }
     setChartData(tempData);
-  }, []);
+  }, [data]);
 
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold uppercase">Temperature</div>
-          <select className="rounded-lg bg-[#38b649] px-2 py-1 text-white">
+          <select
+            hidden
+            className="rounded-lg bg-[#38b649] px-2 py-1 text-white"
+          >
             <option className="bg-white text-black" value="hours">
               Hours
             </option>
@@ -71,19 +92,13 @@ export function TemperatureChart() {
             }}
           >
             <CartesianGrid />
-            <YAxis
-              dataKey="temperature"
-              axisLine={false}
-              tickMargin={8}
-              width={36}
-            />
+            <YAxis axisLine={false} tickMargin={8} width={36} />
 
             <XAxis
               dataKey="hours"
               axisLine={false}
               tickMargin={10}
               angle={-50}
-              // tickFormatter={(value) => value.slice(0, 3)}
             />
 
             <ChartTooltip
@@ -92,7 +107,7 @@ export function TemperatureChart() {
             />
             <Line
               dataKey="temperature"
-              type="natural"
+              type="linear"
               stroke="var(--color-temperature)"
               strokeWidth={2}
               dot={{

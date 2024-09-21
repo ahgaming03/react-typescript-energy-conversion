@@ -17,28 +17,40 @@ const chartConfig = {
   },
   CO2: {
     label: "CO2",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--CO2))",
   },
   NO2: {
     label: "NO2",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--NO2))",
   },
-  CH4: {
-    label: "CH4",
-    color: "hsl(var(--chart-3))",
+  SO2: {
+    label: "SO2",
+    color: "hsl(var(--SO2))",
   },
-  others: {
-    label: "Others",
-    color: "hsl(var(--chart-5))",
+  CO: {
+    label: "CO",
+    color: "hsl(var(--CO))",
   },
+  // others: {
+  //   label: "Others",
+  //   color: "hsl(var(--chart-5))",
+  // },
 } satisfies ChartConfig;
 
 export function GHGPieChart() {
+  // const [chartData] = useState([
+  //   { gas: "CO2", value: 20, fill: "var(--color-other" },
+  //   { gas: "NO2", value: 20, fill: "#ff928a" },
+  //   { gas: "SO2", value: 20, fill: "#3bc3de" },
+  //   { gas: "CO", value: 20, fill: "#3bc3de" },
+  //   { gas: "others", value: 20, fill: "#ffae4c" },
+  // ]);
   const [chartData] = useState([
-    { gas: "CO2", value: 25, fill: "#8979ff" },
-    { gas: "NO2", value: 25, fill: "#ff928a" },
-    { gas: "CH4", value: 25, fill: "#3bc3de" },
-    { gas: "others", value: 25, fill: "#ffae4c" },
+    { gas: "CO2", value: 25, fill: "var(--color-CO2" },
+    { gas: "NO2", value: 25, fill: "var(--color-NO2" },
+    { gas: "SO2", value: 25, fill: "var(--color-SO" },
+    { gas: "CO", value: 25, fill: "var(--color-CO" },
+    // { gas: "others", value: 20, fill: "#ffae4c" },
   ]);
   const data = useDataContext().GHG;
   useEffect(() => {
@@ -52,12 +64,15 @@ export function GHGPieChart() {
           case "NO2":
             d.value = tempData[0]["NO2"];
             break;
-          case "CH4":
-            d.value = tempData[0]["CH4"];
+          case "SO2":
+            d.value = tempData[0]["SO2"];
             break;
-          case "others":
-            d.value = tempData[0]["others"];
+          case "CO":
+            d.value = tempData[0]["CO"];
             break;
+          // case "others":
+          //   d.value = tempData[0]["others"];
+          //   break;
         }
       });
   }, []);
