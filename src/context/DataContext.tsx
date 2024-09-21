@@ -80,7 +80,7 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
         .get(`${BASE_URL}/api/getData`)
         .then((res) => {
           const data = res.data;
-          if (data.length === 0) fetchDataAPI();
+          if (data.length === 0) setTimeout(fetchDataAPI, 10000);
           setTempData([]);
           setGHGData([]);
           data.forEach((element: any) => {
