@@ -7,11 +7,13 @@ export interface IFactoryInfo {
 
 export interface IGHG {
   id: string;
+  hours: string;
   day: string;
   month: string;
+  CO: number;
   CO2: number;
   NO2: number;
-  CH4: number;
+  SO2: number;
   others: number;
 }
 export interface ITemperature {
