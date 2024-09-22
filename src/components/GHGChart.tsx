@@ -118,7 +118,7 @@ export function GHGAreaChart() {
               axisLine={false}
               tickMargin={8}
               angle={-50}
-              // tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => value}
             />
             <ChartTooltip
               cursor={false}
@@ -235,12 +235,14 @@ export const GHGLineChart = () => {
                 tickLine={false}
                 tickMargin={10}
                 width={40}
+                tickFormatter={(value = 0) => value}
               />
               <XAxis
                 dataKey="hours"
                 axisLine={false}
                 tickMargin={10}
                 angle={-50}
+                tickFormatter={(value = 0) => value}
               />
 
               <ChartTooltip

@@ -98,7 +98,12 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
         temperature: tempData,
       });
     };
-    fetchDataAPI();
+
+    const interval = setInterval(() => {
+      fetchDataAPI();
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, [data]);
 
   return (
