@@ -11,7 +11,10 @@ import {
 interface IData {
   GHG: IGHG[];
   temperature: ITemperature[];
+  delay: number;
 }
+
+const delayTime = 15;
 
 export const DataContext = createContext<IData | undefined>(undefined);
 
@@ -45,6 +48,7 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
   const [data, setData] = useState<IData>({
     GHG: [],
     temperature: [],
+    delay: delayTime,
   });
   const [tempData, setTempData] = useState<ITemperature[]>([]);
   const [GHGData, setGHGData] = useState<IGHG[]>([]);
@@ -108,14 +112,15 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
         setData({
           GHG: GHGData,
           temperature: tempData,
+          delay: delayTime,
         });
       } catch (err) {
         console.error(err);
       }
     };
 
-    // Fetch data initially and then every 5 seconds
-    const intervalId = setInterval(fetchDataAPI, 5000);
+    // Fetch data initially and then every n seconds
+    const intervalId = setInterval(fetchDataAPI, delayTime * 1000);
 
     // Cleanup interval on unmount
     return () => clearInterval(intervalId);

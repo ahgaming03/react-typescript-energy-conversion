@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader } from "./ui/card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFactoryInfoContext } from "@/context/FactoryInfoContext";
 import { useDataContext } from "@/context/DataContext";
+import Loading from "./Loading";
 
 export const Current = () => {
   const factoryInfo = useFactoryInfoContext();
@@ -11,7 +12,7 @@ export const Current = () => {
     <>
       <section>
         <div className="mb-3 flex items-center justify-between md:flex-col-reverse">
-          <div className="text-3xl font-bold uppercase">Current</div>
+          <h1 className="text-3xl font-bold uppercase">Current</h1>
           <div className="flex gap-2">
             <div className="text-right font-bold">
               <p>ID:</p>
@@ -23,7 +24,7 @@ export const Current = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-around md:flex-col md:gap-3">
+        <div className="flex flex-wrap items-center justify-around gap-3 md:flex-col">
           <Card className="flex h-48 w-48 flex-col rounded-2xl border shadow-xl">
             <CardHeader className="p-2 text-2xl font-bold uppercase">
               GHG
@@ -63,9 +64,11 @@ export const Current = () => {
               />
             </CardHeader>
             <CardContent className="flex flex-grow items-center justify-center p-0 text-7xl font-bold text-red-500">
-              {temperature.length > 0
-                ? temperature[temperature.length - 1].temperature
-                : "-"}
+              {temperature.length > 0 ? (
+                temperature[temperature.length - 1].temperature
+              ) : (
+                <Loading />
+              )}
             </CardContent>
           </Card>
         </div>
