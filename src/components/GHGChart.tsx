@@ -2,7 +2,7 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
-  LabelList,
+  // LabelList,
   Line,
   LineChart,
   XAxis,
@@ -263,12 +263,12 @@ export const GHGLineChart = () => {
                     r: 6,
                   }}
                 >
-                  <LabelList
+                  {/* <LabelList
                     position="top"
                     offset={12}
                     className="fill-foreground"
                     fontSize={12}
-                  />
+                  /> */}
                 </Line>
               ))}
 

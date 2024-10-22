@@ -27,6 +27,19 @@ interface DataContextProviderProps {
   children: ReactNode;
 }
 
+interface dataProps {
+  ChiSoDat_ID: string;
+  Datetime: string | number | Date;
+  ChiSoDat: {
+    CO: number;
+    CO2: number;
+    NO2: number;
+    SO2: number;
+    Others: number;
+    Temperature: number;
+  };
+}
+
 export const DataContextProvider = ({ children }: DataContextProviderProps) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [data, setData] = useState<IData>({
@@ -36,7 +49,7 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
   const [tempData, setTempData] = useState<ITemperature[]>([]);
   const [GHGData, setGHGData] = useState<IGHG[]>([]);
 
-  const formatData = (data: any) => {
+  const formatData = (data: dataProps) => {
     const id = data.ChiSoDat_ID;
 
     const time = new Date(data.Datetime);
@@ -74,41 +87,39 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
 
     return { temperatureData, GHGData };
   };
+
   useEffect(() => {
     const fetchDataAPI = async () => {
-      await axios
-        .get(`${BASE_URL}/api/getData`)
-        .then((res) => {
-          const data = res.data;
-          if (data.length === 0) setTimeout(fetchDataAPI, 10000);
-          setTempData([]);
-          setGHGData([]);
-          data.forEach((element: any) => {
-            const { temperatureData, GHGData } = formatData(element);
+      try {
+        const res = await axios.get(`${BASE_URL}/api/getData`);
+        const data = res.data;
 
-            setTempData((prev) => [temperatureData, ...prev]);
-            setGHGData((prev) => [GHGData, ...prev]);
-          });
-        })
-        .catch((err) => {
-          console.error(err);
+        if (data.length === 0) return;
+
+        setTempData([]);
+        setGHGData([]);
+
+        data.forEach((element: dataProps) => {
+          const { temperatureData, GHGData } = formatData(element);
+          setTempData((prev) => [temperatureData, ...prev]);
+          setGHGData((prev) => [GHGData, ...prev]);
         });
-      setData({
-        GHG: GHGData,
-        temperature: tempData,
-      });
+
+        setData({
+          GHG: GHGData,
+          temperature: tempData,
+        });
+      } catch (err) {
+        console.error(err);
+      }
     };
 
-    const interval = setInterval(() => {
-      fetchDataAPI();
-    }, 10000);
+    // Fetch data initially and then every 5 seconds
+    const intervalId = setInterval(fetchDataAPI, 5000);
 
-    return () => clearInterval(interval);
-  }, [data]);
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, [BASE_URL, tempData, GHGData]);
 
-  return (
-    <>
-      <DataContext.Provider value={data}>{children}</DataContext.Provider>
-    </>
-  );
+  return <DataContext.Provider value={data}>{children}</DataContext.Provider>;
 };
